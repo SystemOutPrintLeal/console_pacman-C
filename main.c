@@ -12,14 +12,11 @@ int acabou()
     return 0;
 }
 
+
 void move(char direction)
 {
 
-    if( direction != 'a' &&
-        direction != 's' &&
-        direction != 'w' &&
-        direction != 'd'
-        ) return;
+    if( !isDirection(direction) ) return;
 
     int next_x = hero.x;
     int next_y = hero.y;
@@ -46,13 +43,11 @@ void move(char direction)
         return;
         break;
     }
-    if (next_x >= map.lines )return;
-    if (next_y >= map.columns) return;
-    if (map.matriz[next_x][next_y] != '.') return;
 
-    map.matriz[next_x][next_y] = '@';
-    map.matriz [hero.x][hero.y] = '.';
+    if(!isValid(&map, next_x, next_y)) return;
+    if(!isEmpty(&map, next_x, next_y)) return;
 
+    runInMap(&map,hero.x,hero.y,next_x,next_y);
     hero.x = next_x;
     hero.y = next_y;
     

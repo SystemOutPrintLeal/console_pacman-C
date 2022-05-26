@@ -2,6 +2,36 @@
 #include <stdlib.h>
 #include "mapa.h"
 
+
+int isDirection(char direction)
+{
+    return  direction == 'a' ||
+            direction == 'w' ||
+            direction == 's' ||
+            direction == 'd';
+}
+
+int isEmpty(MAP* m, int x, int y)
+{
+    return m->matriz[x][y] == '.';
+}
+
+
+int isValid(MAP* m, int x, int y)
+{
+    if(x >= m->lines) return 0;
+    if(y >= m->columns) return 0;
+
+    return 1;
+}
+
+void runInMap(MAP* m, int origin_x, int origin_y, int destiny_x, int destiny_y)
+{
+    //char character = m->matriz[origin_x][origin_y];
+    m->matriz[destiny_x][destiny_y] = '@';
+    m->matriz[origin_x][origin_y] = '.';
+}
+
 void searchMap(MAP* m, POSICAO* p, char c)
 {
     for (int i=0 ; i<m->lines; i++ )
